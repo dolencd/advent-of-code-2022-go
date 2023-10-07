@@ -9,29 +9,29 @@ import (
 )
 
 type point struct {
-	x,y int
+	x, y int
 }
 
-func main(){
-	input,err := os.Open("./input.txt")
-	if (err != nil) {
+func main() {
+	input, err := os.Open("./input.txt")
+	if err != nil {
 		fmt.Println((err))
 	}
 	defer input.Close()
 	sc := bufio.NewScanner(input)
-	
+
 	head := point{0, 0}
 	tail := head
-	tailPositions := make(map [point]bool)
+	tailPositions := make(map[point]bool)
 	tailPositions[tail] = true
-	for sc.Scan(){
-		direction := rune(sc.Text()[0]);
+	for sc.Scan() {
+		direction := rune(sc.Text()[0])
 		moveDistance, err := strconv.Atoi(sc.Text()[2:])
-		if (err != nil) {
+		if err != nil {
 			log.Fatal(err)
 		}
 
-		for i := 0; i < moveDistance ; i++ {
+		for i := 0; i < moveDistance; i++ {
 			oldHead := head
 
 			switch direction {
@@ -47,7 +47,7 @@ func main(){
 
 			if !isAdjacent(tail, head) {
 				tail = oldHead
-				tailPositions[tail] = true;
+				tailPositions[tail] = true
 			}
 		}
 	}
@@ -56,12 +56,12 @@ func main(){
 }
 
 func isAdjacent(a point, b point) bool {
-	return Abs(b.x - a.x) <= 1 && Abs(b.y - a.y) <= 1
+	return Abs(b.x-a.x) <= 1 && Abs(b.y-a.y) <= 1
 }
 
 func Abs(x int) int {
-    if x < 0 {
-        return -x
-    }
-    return x
+	if x < 0 {
+		return -x
+	}
+	return x
 }

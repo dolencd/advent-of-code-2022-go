@@ -10,25 +10,25 @@ type stack struct {
 	crates []rune
 }
 
-func fromString(str string)stack {
-	return stack {
+func fromString(str string) stack {
+	return stack{
 		crates: []rune(str),
 	}
 }
 
 func (s *stack) pop() rune {
-	last := s.crates[len(s.crates)-1];
+	last := s.crates[len(s.crates)-1]
 	s.crates = s.crates[:len(s.crates)-1]
 	return last
 }
 
 func (s *stack) push(r rune) {
 	s.crates = append(s.crates, r)
-} 
+}
 
-func main(){
-	input,err := os.Open("./input.txt")
-	if (err != nil) {
+func main() {
+	input, err := os.Open("./input.txt")
+	if err != nil {
 		fmt.Println((err))
 	}
 	defer input.Close()
@@ -44,7 +44,7 @@ func main(){
 		fromString("NGMTCJR"),
 		fromString("LGBW"),
 	}
-	for sc.Scan(){
+	for sc.Scan() {
 		var move, from, to int
 		fmt.Sscanf(sc.Text(), "move %d from %d to %d", &move, &from, &to)
 		for i := 0; i < move; i++ {
@@ -52,7 +52,7 @@ func main(){
 		}
 	}
 
-	for i := range(stacks) {
+	for i := range stacks {
 		stack := stacks[i]
 		fmt.Print(string(stack.pop()))
 	}
